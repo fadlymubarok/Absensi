@@ -20,7 +20,7 @@
             </div>
             <div class="d-flex flex-column">
                 <p class="mb-0">Alamat:</p>
-                <p class="text-center">{{auth()->user()->alamat}}</p>
+                <p class="mb-3">{{auth()->user()->alamat}}</p>
             </div>
             <a href="/logout" class="btn btn-primary d-flex justify-content-center">Logout</a>
         </div>
