@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Absen;
 use App\Models\User;
+use App\Models\Absen;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -42,6 +43,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/siswa', SiswaController::class)->except('show');
     Route::resource('/admins', AdminController::class)->except('show');
 
+    // profile
+    Route::get('/admin/profile', function () {
+        $title = 'Profile';
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->get();
+        return view('admin.profile.index', compact('title', 'user'));
+    });
+
     // absen hadir
     Route::get('/absensi-siswa', [AbsensiController::class, 'absensi_siswa']);
     Route::post('/absensi-siswa', [AbsensiController::class, 'store']);
@@ -56,4 +65,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('absensi-tidak-hadir', [AbsensiController::class, 'absensi_tidak_hadir']);
     Route::post('absensi-tidak-hadir', [AbsensiController::class, 'tidak_hadir']);
 });
-
