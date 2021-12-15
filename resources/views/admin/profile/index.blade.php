@@ -9,9 +9,6 @@
 <div class="container">
     <div class="card" style="width: 18rem; margin: 100px auto;">
         <i class="card-img-top fas fa-user-circle fa-5x" style="padding: 10px 105px;"></i>
-        <div class="camera-hidden">
-            
-        </div>
         <div class="card-body border-top pt-1">
             <div class="d-flex flex-column">
                 <p class="mb-0">Nama:</p>

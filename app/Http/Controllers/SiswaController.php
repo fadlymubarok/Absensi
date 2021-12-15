@@ -31,7 +31,13 @@ class SiswaController extends Controller
         $title = 'buat data';
         $rombels = Rombel::all();
         $rayons = Rayon::all();
-        return view('admin.siswa.create', compact('title', 'rombels', 'rayons'));
+        $cek = User::count();
+        if ($cek != 0) {
+            $ambil = User::all()->last();
+            $urut = (int)substr($ambil->nis, 7) + 1;
+            $nomer = 1190709 . $urut;
+        }
+        return view('admin.siswa.create', compact('title', 'rombels', 'rayons', 'nomer'));
     }
 
     /**

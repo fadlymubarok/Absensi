@@ -19,7 +19,7 @@
             <div class="d-flex">
                 <div class="mb-3 pl-3 w-50">
                     <label for="nis" class="form-label">Nis</label>
-                    <input type="text" class="form-control @error('nis') is-invalid @enderror" name="nis" value="{{ old('nis') }}" required autofocus>
+                    <input type="text" class="form-control" name="nis" value="{{$nomer}}" readonly>
                     @error('nis')
                     <div class="invalid-feedback">
                         {{ $message }}
