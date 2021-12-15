@@ -33,6 +33,10 @@
             <!-- Main Content -->
             <div id="content">
 
+                <!-- Topbar -->
+                @yield('topbar')
+                <!-- End of Topbar -->
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid mt-4">
                     @yield('content')

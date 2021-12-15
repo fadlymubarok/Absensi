@@ -58,10 +58,11 @@
 @include('admin.layout.sidebar')
 @endsection
 
+@section('topbar')
+@include('admin.layout.topbar')
+@endsection
+
 @section('content')
-<header class="d-flex align-items-center pb-3 mb-2 border-bottom">
-    <h2>Selamat Datang {{ auth()->user()->nama }}</h2>
-</header>
 <div class="container-sm ">
     <div class="alert alert-warning text-center" role="alert">
         <h4>Kamu berhasil Login</h4>

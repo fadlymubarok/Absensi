@@ -24,7 +24,7 @@ use App\Http\Controllers\AbsensiController;
 // login
 Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/', [LoginController::class, 'store']);
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
@@ -37,9 +37,10 @@ Route::group(['middleware' => 'auth'], function () {
         $title = 'absensi';
         return view('admin.absen.index', compact('absen', 'title'));
     });
-    Route::resource('/rayons', RayonController::class);
-    Route::resource('/rombels', RombelController::class);
-    Route::resource('/siswa', SiswaController::class);
+    Route::resource('/rayons', RayonController::class)->except('show');
+    Route::resource('/rombels', RombelController::class)->except('show');
+    Route::resource('/siswa', SiswaController::class)->except('show');
+    Route::resource('/admins', AdminController::class)->except('show');
 
     // absen hadir
     Route::get('/absensi-siswa', [AbsensiController::class, 'absensi_siswa']);
@@ -56,4 +57,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('absensi-tidak-hadir', [AbsensiController::class, 'tidak_hadir']);
 });
 
-Route::resource('/admins', AdminController::class);

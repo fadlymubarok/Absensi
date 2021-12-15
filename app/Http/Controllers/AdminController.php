@@ -14,9 +14,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $siswa = User::where('level', 'admin')->get();
+        $admin = User::where('level', 'admin')->get();
         $title = 'Admin';
-        return view('admin.admin.index', compact('siswa', 'title'));
+        return view('admin.admin.index', compact('admin', 'title'));
     }
 
     /**
@@ -40,6 +40,8 @@ class AdminController extends Controller
     {
         $validate = $request->validate([
             'nama' => 'required|min:5|max:255',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required|min:15|max:255',
             'username' => 'required|unique:users|min:5|max:255',
             'password' => 'required|min:8|max:255',
             'level' => 'required'
@@ -69,7 +71,9 @@ class AdminController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $title = 'Ubah data';
+        $admin = $user;
+        return view('admin.admin.edit', compact('admin', $admin, 'title'));
     }
 
     /**
@@ -92,7 +96,7 @@ class AdminController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        $user::destroy($user->id);
         return redirect('/admins')->with('success', 'Data berhasil dihapus!');
     }
 }

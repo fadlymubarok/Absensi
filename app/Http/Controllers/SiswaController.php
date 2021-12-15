@@ -47,6 +47,8 @@ class SiswaController extends Controller
             'nama' => 'required|min:4|max:255',
             'rombel' => 'required',
             'rayon' => 'required',
+            'tanggal_lahir' => 'required',
+            'alamat' => 'required|min:15|max:255',
             'username' => 'required|unique:users|min:4|max:255',
             'password' => 'required|min:8|max:255',
             'level' => 'required'

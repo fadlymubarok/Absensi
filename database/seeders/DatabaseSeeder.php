@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Faker\Factory as DataPalsu;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $data_palsu = DataPalsu::create('id_ID');
+        User::create([
+            'nama' => 'Fadly Mubarok',
+            'tanggal_lahir' => $data_palsu->date('Y-m-d', $max = 'now'),
+            'alamat' => $data_palsu->address(),
+            'username' => 'fadlymubarok',
+            'password' => bcrypt('12345678'),
+            'level' => 'admin'
+
+        ]);
     }
 }
