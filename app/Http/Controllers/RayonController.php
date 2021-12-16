@@ -18,9 +18,13 @@ class RayonController extends Controller
      */
     public function index()
     {
-        $rayons = Rayon::latest()->paginate(5);
+        $rayon = Rayon::latest();
+        if (request('search')) {
+            $rayon->where('nama_rayon', 'like', '%' . request('search') . '%')
+                ->orWhere('nama_pembimbing', 'like', '%' . request('search') . '%');
+        }
         $title = 'Rayon';
-        // $user = User::CekLogin()->role;
+        $rayons = $rayon->paginate(5);
         return view('admin.rayons.index', compact('title', 'rayons'));
     }
 

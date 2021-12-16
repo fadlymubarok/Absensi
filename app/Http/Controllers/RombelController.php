@@ -14,8 +14,12 @@ class RombelController extends Controller
      */
     public function index()
     {
-        $rombels = Rombel::latest()->paginate(5);
+        $rombel = Rombel::latest();
+        if (request('search')) {
+            $rombel->where('nama_rombel', 'like', '%' . request('search') . '%');
+        }
         $title = 'Rombel';
+        $rombels = $rombel->paginate(5);
         return view('admin.rombels.index', compact('title', 'rombels'));
     }
 

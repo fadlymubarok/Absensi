@@ -14,8 +14,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admin = User::where('level', 'admin')->get();
+        $admins = User::where('level', 'admin');
+        if (request('search')) {
+            $admins->where('username', 'like', '%' . request('search') . '%')
+                ->orWhere('nama', 'like', '%' . request('search') . '%')
+                ->orWhere('alamat', 'like', '%' . request('search') . '%');
+        }
         $title = 'Admin';
+        $admin = $admins->get();
         return view('admin.admin.index', compact('admin', 'title'));
     }
 

@@ -16,8 +16,15 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswa = User::where('level', 'siswa')->get();
+        $siswas = User::where('level', 'siswa');
+        if (request('search')) {
+            $siswas->where('nama', 'like', '%' . request('search') . '%')
+                ->orWhere('nis', 'like', '%' . request('search') . '%')
+                ->orWhere('rombel', 'like', '%' . request('search') . '%')
+                ->orWhere('rayon', 'like', '%' . request('search') . '%');
+        }
         $title = 'siswa';
+        $siswa = $siswas->get();
         return view('admin.siswa.index', compact('siswa', 'title'));
     }
 
