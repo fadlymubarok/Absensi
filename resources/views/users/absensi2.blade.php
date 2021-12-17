@@ -31,14 +31,10 @@
             </div>
             <form action="/absensi-siswa2" method="post">
                 @csrf
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-4">
                         <h5>Datang</h5>
                         <span>{{ $absen->jam_kedatangan }}</span>
-
-                        <input type="hidden" class="form-control" name="nis" value="{{ auth()->user()->nis }}" required>
-                        <input type="hidden" class="form-control" name="id" value="{{ $absen->id }}">
-                        <input type="hidden" class="form-control" name="jam_kepulangan" value="{{ $carbon->toTimeString() }}">
                     </div>
                     <div class="col-4">
                         <h5>Pulang</h5>

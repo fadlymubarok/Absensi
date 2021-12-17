@@ -32,7 +32,7 @@
             </div>
             <form action="/absensi-siswa" method="post">
                 @csrf
-                <div class="alert alert-light" role="alert">
+                <div class="alert alert-light mt-n1" role="alert">
                     <div class="d-grid gap-2 col-6 mx-auto py-2">
                         <input type="hidden" class="form-control" name="nis" value="{{ auth()->user()->nis }}">
                         <button class="btn btn-primary" type="submit" value="Datang" name="keterangan">Datang</button>

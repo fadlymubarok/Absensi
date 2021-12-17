@@ -36,6 +36,7 @@
                                 </div>
                                 @enderror
                             </div>
+                            <input type="hidden" name="tanggal" value="{{$today}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </div>

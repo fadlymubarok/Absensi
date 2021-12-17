@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/absen', function () {
-        $absen = Absen::all();
         $title = 'absensi';
+        $absen = Absen::latest()->get();
         return view('admin.absen.index', compact('absen', 'title'));
     });
     Route::resource('/rayons', RayonController::class)->except('show');
@@ -43,7 +43,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/siswa', SiswaController::class)->except('show');
     Route::resource('/admins', AdminController::class)->except('show');
 
-    // profile
+    // profile user
+    Route::get('/profile', function () {
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->get();
+        return view('users.profile', compact('user'));
+    });
+
+    // profile admin
     Route::get('/admin/profile', function () {
         $title = 'Profile';
         $id = Auth::user()->id;
@@ -58,8 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/absensi-siswa2', [AbsensiController::class, 'absensi_siswa2']);
     Route::post('/absensi-siswa2', [AbsensiController::class, 'update']);
 
-    Route::get('/absensi-siswa3', [AbsensiController::class, 'absensi_siswa3']);
-    Route::post('/absensi-siswa3', [AbsensiController::class, 'logout']);
+    Route::get('/dashboard-siswa', [AbsensiController::class, 'dashboard_siswa']);
+    Route::post('/dashboard-siswa', [AbsensiController::class, 'destroy']);
 
     //  Absen tidak hadir
     Route::get('absensi-tidak-hadir', [AbsensiController::class, 'absensi_tidak_hadir']);

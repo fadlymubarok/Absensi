@@ -16,7 +16,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswas = User::where('level', 'siswa');
+        $siswas = User::where('level', 'siswa')->latest();
         if (request('search')) {
             $siswas->where('nama', 'like', '%' . request('search') . '%')
                 ->orWhere('nis', 'like', '%' . request('search') . '%')

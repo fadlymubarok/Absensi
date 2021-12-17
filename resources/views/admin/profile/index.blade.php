@@ -26,11 +26,6 @@
         </div>
     </div>
 </div>
-
-<!-- javascipt -->
-<script>
-
-</script>
 @endsection
 
 @section('footer')
