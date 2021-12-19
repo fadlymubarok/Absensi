@@ -68,7 +68,7 @@
         </div>
         @endif
         <table class="table border border-top-0">
-            <thead class="table-info">
+            <thead class="table-info text-dark">
                 <tr>
                     <th>No</th>
                     <th>Nama Rayon</th>

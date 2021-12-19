@@ -96,13 +96,12 @@
                                 <th>Keterangan</th>
                                 <th>Tanggal</th>
                                 <th>Foto Bukti</th>
-                                <th width="200px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if($absen->count())
                             @foreach($absen as $absen)
-                            <tr>
+                            <tr class="mt-0">
                                 <td>{{ $loop->iteration}}</td>
                                 <td>{{ $absen->nis }}</td>
                                 <td>
@@ -127,13 +126,6 @@
                                     @else
                                     <span>-</span>
                                     @endif
-                                </td>
-                                <td>
-                                    <form action="/absens/{{ $absen->id }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus {{ $absen->nama_absen }}?');">Delete</button>
-                                    </form>
                                 </td>
                             </tr>
                             @endforeach

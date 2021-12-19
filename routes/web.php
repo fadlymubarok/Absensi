@@ -27,28 +27,28 @@ Route::get('/', [LoginController::class, 'login'])->name('login')->middleware('g
 Route::post('/', [LoginController::class, 'store']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', function () {
-        $title = 'Dashboard';
-        return view('admin.dashboard', compact('title'));
-    });
+// karena keduanya masuk ke dashboard jadi middleware hanya auth
+Route::get('/dashboard', function () {
+    $title = 'Dashboard';
+    return view('admin.dashboard', compact('title'));
+})->middleware('auth');
 
+// Untuk admin
+Route::group(['middleware' => 'levelAdmin'], function () {
     Route::get('/absen', function () {
         $title = 'absensi';
-        $absen = Absen::latest()->get();
+        $absens = Absen::latest();
+        if (request('search')) {
+            $absens->where('nis', 'like', '%' . request('search') . '%')
+                ->orWhere('keterangan', 'like', '%' . request('search') . '%');
+        }
+        $absen = $absens->get();
         return view('admin.absen.index', compact('absen', 'title'));
     });
     Route::resource('/rayons', RayonController::class)->except('show');
     Route::resource('/rombels', RombelController::class)->except('show');
     Route::resource('/siswa', SiswaController::class)->except('show');
     Route::resource('/admins', AdminController::class)->except('show');
-
-    // profile user
-    Route::get('/profile', function () {
-        $id = Auth::user()->id;
-        $user = User::where('id', $id)->get();
-        return view('users.profile', compact('user'));
-    });
 
     // profile admin
     Route::get('/admin/profile', function () {
@@ -57,8 +57,11 @@ Route::group(['middleware' => 'auth'], function () {
         $user = User::where('id', $id)->get();
         return view('admin.profile.index', compact('title', 'user'));
     });
+});
 
-    // absen hadir
+// untuk siswa
+Route::group(['middleware' => 'levelSiswa'], function () {
+
     Route::get('/absensi-siswa', [AbsensiController::class, 'absensi_siswa']);
     Route::post('/absensi-siswa', [AbsensiController::class, 'store']);
 
@@ -71,4 +74,11 @@ Route::group(['middleware' => 'auth'], function () {
     //  Absen tidak hadir
     Route::get('absensi-tidak-hadir', [AbsensiController::class, 'absensi_tidak_hadir']);
     Route::post('absensi-tidak-hadir', [AbsensiController::class, 'tidak_hadir']);
+
+    // profile user
+    Route::get('/profile', function () {
+        $id = Auth::user()->id;
+        $user = User::where('id', $id)->get();
+        return view('users.profile', compact('user'));
+    });
 });
