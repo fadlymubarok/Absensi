@@ -71,10 +71,9 @@
             <thead class="table-info text-dark">
                 <tr>
                     <th>No</th>
-                    <th width="200px">Nama</th>
-                    <th width="150px">Username</th>
-                    <th width="300px">Alamat</th>
-                    <th width="200px">Aksi</th>
+                    <th>Nama</th>
+                    <th>Username</th>
+                    <th>Alamat</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,14 +83,6 @@
                     <td>{{ $admin->nama }}</td>
                     <td>{{ $admin->username }}</td>
                     <td>{{ $admin->alamat }}</td>
-                    <td>
-                        <form action="/admins/{{ $admin->id }}" method="post">
-                            <a href="/admins/{{ $admin->id }}/edit" class="btn btn-warning">Ubah</a>
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus {{ $admin->nama_admin }}?');">Delete</button>
-                        </form>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>

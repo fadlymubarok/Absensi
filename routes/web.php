@@ -47,8 +47,8 @@ Route::group(['middleware' => 'levelAdmin'], function () {
     });
     Route::resource('/rayons', RayonController::class)->except('show');
     Route::resource('/rombels', RombelController::class)->except('show');
-    Route::resource('/siswa', SiswaController::class)->except('show');
-    Route::resource('/admins', AdminController::class)->except('show');
+    Route::resource('/siswa', SiswaController::class)->except('show', 'destroy', 'edit', 'update');
+    Route::resource('/admins', AdminController::class)->except('show', 'destroy', 'edit', 'update');
 
     // profile admin
     Route::get('/admin/profile', function () {
@@ -69,7 +69,6 @@ Route::group(['middleware' => 'levelSiswa'], function () {
     Route::post('/absensi-siswa2', [AbsensiController::class, 'update']);
 
     Route::get('/dashboard-siswa', [AbsensiController::class, 'dashboard_siswa']);
-    Route::post('/dashboard-siswa', [AbsensiController::class, 'destroy']);
 
     //  Absen tidak hadir
     Route::get('absensi-tidak-hadir', [AbsensiController::class, 'absensi_tidak_hadir']);

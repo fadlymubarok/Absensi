@@ -75,7 +75,6 @@
                     <th>Nama</th>
                     <th>Rombel</th>
                     <th>Rayon</th>
-                    <th width="200px">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,14 +85,6 @@
                     <td>{{ $siswa->nama }}</td>
                     <td>{{ $siswa->rombel }}</td>
                     <td>{{ $siswa->rayon }}</td>
-                    <td>
-                        <form action="/siswa/{{ $siswa->id }}" method="post">
-                            <a href="/siswa/{{ $siswa->id }}/edit" class="btn btn-warning">Ubah</a>
-                            @method('delete')
-                            @csrf
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus {{ $siswa->nama }}?');">Delete</button>
-                        </form>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>
